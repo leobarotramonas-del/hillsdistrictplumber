@@ -6,7 +6,7 @@ import CtaBand from '../../components/CtaBand.astro';
 import { services } from '../../data/site';
 ---
 <BaseLayout title="Hills District Plumbing Services | Antons" description="Explore licensed Hills District plumbing, including blocked drains, hot water, repairs, gas fitting, leak detection and urgent help." canonicalPath="/services/">
-  <PageHero eyebrow="Licensed Hills District plumbing" title="Plumbing Services for Homes and Properties" intro="Choose the service that best matches the symptoms. If you are unsure, call and explain what you can see, hear or smell so the team can guide the next step." image={services[0].image} imageSmall={services[0].imageSmall} imageAlt={services[0].alt} />
+  <PageHero eyebrow="Licensed Hills District plumbing" title="Plumbing Services for Homes and Properties" intro="Choose the service that best matches the symptoms. If you are unsure, call and explain what you can see, hear or smell so the team can guide the next step." image="/images/team.webp" imageSmall="/images/team-420.webp" imageAlt="Three Antons plumbers standing together in front of a blue service vehicle" />
   <section class="directory wrap"><div class="service-grid">{services.map((service) => <article class="service-card"><ResponsiveImage src={service.image} small={service.imageSmall} alt={service.alt} /><div class="service-card__body"><p class="service-card__label">{service.short}</p><h3>{service.name}</h3><p>{service.intro}</p><a href={`/services/${service.slug}/`}>Learn More</a></div></article>)}</div></section>
   <CtaBand />
 </BaseLayout>
