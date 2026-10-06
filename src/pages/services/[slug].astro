@@ -18,7 +18,7 @@ const schema = [
 ---
 <BaseLayout title={service.title} description={service.description} canonicalPath={path} schema={schema} image={service.image}>
   <PageHero eyebrow="Hills District plumbing service" title={service.name} intro={service.intro} />
-  <section class="content-section wrap"><div class="content-grid"><ResponsiveImage src={service.image} small={service.imageSmall} alt={service.alt} /><div><p class="eyebrow">How we can help</p><h2>Start with a Careful Assessment</h2><p>The cause, access and condition of the surrounding plumbing are reviewed before a repair approach is recommended. Regulated work is completed by the Antons team operating under NSW contractor licence {site.licence}.</p><ul class="check-list">{service.details.map((item) => <li>{item}</li>)}</ul></div></div></section>
+  <section class="content-section wrap"><div class="content-grid content-grid--media-right"><div><p class="eyebrow">How we can help</p><h2>Start with a Careful Assessment</h2><p>The cause, access and condition of the surrounding plumbing are reviewed before a repair approach is recommended. Regulated work is completed by the Antons team operating under NSW contractor licence {site.licence}.</p><ul class="check-list">{service.details.map((item) => <li>{item}</li>)}</ul></div><ResponsiveImage class="detail-media" src={service.image} small={service.imageSmall} alt={service.alt} width={900} height={675} /></div></section>
   <FaqSection faqs={faqs} title={`${service.name} questions`} />
   <CtaBand title={`Ask about ${service.name.toLowerCase()}`} />
 </BaseLayout>
