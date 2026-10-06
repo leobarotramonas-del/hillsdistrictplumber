@@ -119,6 +119,7 @@ p { max-width: 70ch; margin-block: 0 1rem; }
 .process-step h3 { font-size: 1.8rem; }
 .process-step p { color: var(--muted); font-size: .9rem; }
 .reviews { color: #fff; background: var(--navy-raised); }
+.reviews review-carousel { display: block; }
 .reviews .section-heading p:last-child { color: #d5deed; }
 .review-controls { display: flex; justify-content: flex-end; gap: .5rem; margin-bottom: 1rem; }
 .review-controls button { width: 3rem; height: 3rem; color: #fff; background: transparent; border: 1px solid rgb(255 255 255 / 42%); border-radius: .5rem; cursor: pointer; transition: background-color .2s ease, transform .2s ease; }
