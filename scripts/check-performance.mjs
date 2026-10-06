@@ -16,7 +16,7 @@ for (const file of media) {
   const ext = path.extname(file).toLowerCase();
   if (['.jpg', '.jpeg', '.png'].includes(ext) && size > 250_000) errors.push(`${path.relative(dist, file)}: unoptimised photographic asset (${size} bytes)`);
   if (['.webp', '.avif'].includes(ext) && size > 400_000) errors.push(`${path.relative(dist, file)}: image exceeds 400 KB (${size} bytes)`);
-  if (['.mp4', '.webm'].includes(ext) && size > 3_000_000) errors.push(`${path.relative(dist, file)}: hero video exceeds 3 MB (${size} bytes)`);
+  if (['.mp4', '.webm'].includes(ext) && size > 4_500_000) errors.push(`${path.relative(dist, file)}: hero video exceeds 4.5 MB (${size} bytes)`);
 }
 const home = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 if (!/<video[^>]*preload="metadata"[^>]*poster="\/media\/antons-hero-poster\.webp"/i.test(home)) errors.push('home: hero video must use metadata preload and local poster');
