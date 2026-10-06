@@ -2,9 +2,23 @@
 interface Props { name: string; postcode: string }
 const { name, postcode } = Astro.props;
 const query = encodeURIComponent(`${name} NSW ${postcode}`);
+const previewByArea: Record<string, string> = {
+  'Baulkham Hills': '/images/map-baulkham-hills.webp',
+  'Winston Hills': '/images/map-baulkham-hills.webp',
+  Kellyville: '/images/map-kellyville.webp',
+  'Beaumont Hills': '/images/map-kellyville.webp',
+  'North Kellyville': '/images/map-north-kellyville.webp',
+  'Rouse Hill': '/images/map-north-kellyville.webp',
+};
+const preview = previewByArea[name] ?? '/images/map-baulkham-hills.webp';
 ---
 <div class="map-placeholder" data-map data-query={query}>
-  <div data-map-prompt><p class="eyebrow">Map loads on request</p><h2>{name} {postcode}</h2><p>The interactive map is kept out of the initial page load.</p><button type="button">Load map</button></div>
+  <img src={preview} width="800" height="500" loading="lazy" decoding="async" alt={`Street map preview of ${name} NSW ${postcode}`} />
+  <div class="map-placeholder__prompt" data-map-prompt>
+    <h2>{name} {postcode}</h2>
+    <p>View streets and surrounding areas on the interactive map.</p>
+    <button type="button">Open Interactive Map</button>
+  </div>
 </div>
 <script>
   document.querySelectorAll<HTMLElement>('[data-map]').forEach((map) => {
