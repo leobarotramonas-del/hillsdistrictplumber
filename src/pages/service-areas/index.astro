@@ -5,7 +5,7 @@ import CtaBand from '../../components/CtaBand.astro';
 import { areas } from '../../data/site';
 ---
 <BaseLayout title="Hills District Plumbing Service Areas" description="View priority Hills District plumbing coverage in Baulkham Hills, Kellyville, North Kellyville, Winston Hills, Rouse Hill and Beaumont Hills." canonicalPath="/service-areas/">
-  <PageHero eyebrow="Our local service area" title="Plumbing Across the Hills District" intro="We primarily serve the Hills District suburbs below for blocked drains, hot water, leaks, gas fitting and general plumbing. Call with your full address and plumbing issue to arrange local service." />
+  <PageHero eyebrow="Our local service area" title="Plumbing Across the Hills District" intro="We primarily serve the Hills District suburbs below for blocked drains, hot water, leaks, gas fitting and general plumbing. Call with your full address and plumbing issue to arrange local service." image={areas[0].image} imageSmall={areas[0].imageSmall} imageAlt={areas[0].alt} />
   <section class="directory wrap"><div class="card-list">{areas.map((area) => <a class="route-card" href={`/service-areas/${area.slug}/`}><p class="eyebrow">Hills District · {area.postcode}</p><h2>{area.name}</h2><p>{area.intro}</p><strong>View local plumbing services</strong></a>)}</div></section>
   <CtaBand title="Check Your Hills District Address" />
 </BaseLayout>

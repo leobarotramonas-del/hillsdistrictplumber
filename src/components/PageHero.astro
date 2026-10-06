@@ -1,6 +1,32 @@
 ---
-interface Props { eyebrow: string; title: string; intro: string }
-const { eyebrow, title, intro } = Astro.props;
+import ResponsiveImage from './ResponsiveImage.astro';
+import { site } from '../data/site';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  image?: string;
+  imageSmall?: string;
+  imageAlt?: string;
+}
+const { eyebrow, title, intro, image, imageSmall, imageAlt = '' } = Astro.props;
 ---
-<section class="page-hero"><div class="wrap"><p class="eyebrow">{eyebrow}</p><h1>{title}</h1><p>{intro}</p></div></section>
+{image ? (
+  <section class="page-hero page-hero--split">
+    <div class="page-hero__split wrap">
+      <div class="page-hero__content">
+        <p class="eyebrow">{eyebrow}</p>
+        <h1>{title}</h1>
+        <p>{intro}</p>
+        <a class="button button--red" href={site.phoneHref}>Call {site.phoneDisplay}</a>
+      </div>
+      <div class="page-hero__media">
+        <ResponsiveImage src={image} small={imageSmall ?? image} alt={imageAlt} width={900} height={675} loading="eager" />
+      </div>
+    </div>
+  </section>
+) : (
+  <section class="page-hero"><div class="wrap"><p class="eyebrow">{eyebrow}</p><h1>{title}</h1><p>{intro}</p></div></section>
+)}
 
