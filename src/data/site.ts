@@ -24,6 +24,9 @@ export const services = [
     description: 'Call a licensed Hills District plumber about urgent leaks, overflows and plumbing failures. Urgent calls are answered 24 hours, 7 days a week.',
     intro: 'A burst pipe, overflowing fixture or failed hot-water system can disrupt a home quickly. Call at any time to explain the fault, property access and any immediate safety concerns.',
     details: ['Urgent leak and overflow assessment', 'Burst or damaged pipe repairs', 'Failed fixtures and isolation problems', 'Advice while attendance is being arranged'],
+    overview: 'Emergency plumbing focuses on faults that can quickly damage a property, interrupt essential water services or create an immediate safety concern. A licensed emergency plumber identifies the affected plumbing, helps limit further damage and explains the safest repair path.',
+    signs: ['Water spreading from a burst or damaged pipe', 'An overflowing toilet, drain or fixture', 'Loss of water caused by a failed isolation valve', 'A hot-water fault that is leaking or unsafe'],
+    expertise: ['Rapid fault triage by phone', 'Safe isolation of affected services', 'Repair planning based on access and damage'],
   },
   {
     slug: 'blocked-drains',
@@ -36,6 +39,9 @@ export const services = [
     description: 'Get help with blocked sinks, toilets and drains across the Hills District, with practical inspection and clearing options for the affected pipework.',
     intro: 'Slow fixtures, gurgling drains and repeated backups can point to a restriction deeper in the system. The team starts with the symptoms and accessible pipework before recommending the right clearing method.',
     details: ['Blocked sinks, showers and toilets', 'Drain cleaning and high-pressure jetting', 'Camera inspection where suitable', 'Practical advice for recurring blockages'],
+    overview: 'Blocked drain plumbing covers the inspection and clearing of restricted waste and stormwater pipework. The aim is to locate the affected section, understand whether the blockage is local or recurring, and choose a clearing method suited to the accessible drain.',
+    signs: ['Water draining slowly from sinks or showers', 'Gurgling sounds from nearby fixtures', 'Repeated toilet or floor-waste backups', 'Overflowing gullies or unpleasant drain odours'],
+    expertise: ['High-pressure water jetting where suitable', 'Drain camera inspection of accessible lines', 'Practical advice for recurring restrictions'],
   },
   {
     slug: 'hot-water-systems',
@@ -48,6 +54,9 @@ export const services = [
     description: 'Arrange licensed hot-water system diagnosis, repair or replacement in the Hills District for electric, gas and heat-pump installations.',
     intro: 'No hot water, temperature changes, visible leaks or unusual system noise should be assessed before a repair or replacement is chosen. The existing unit, household demand and installation space all matter.',
     details: ['Fault assessment and repairs', 'Replacement system planning', 'Electric, gas and heat-pump systems', 'Safe removal of replaced units'],
+    overview: 'Hot-water plumbing includes fault diagnosis, repairs and replacement planning for electric, gas and heat-pump systems. The correct approach depends on the unit, its condition, the installation, household demand and whether repair remains practical.',
+    signs: ['No hot water or inconsistent temperature', 'Water leaking around the unit or valves', 'Unusual noise, pressure or discoloured water', 'A system that repeatedly trips or shuts down'],
+    expertise: ['Assessment of the existing installation', 'Repair-versus-replacement guidance', 'Planning for household demand and available space'],
   },
   {
     slug: 'plumbing-repairs',
@@ -60,6 +69,9 @@ export const services = [
     description: 'Book licensed plumbing repairs for leaking taps, toilets, showers, pipework and household fixtures throughout the Hills District.',
     intro: 'Everyday plumbing faults are easier to manage when the cause is assessed before parts are replaced. The team explains the issue, the practical options and the agreed scope of work.',
     details: ['Leaking taps and fixtures', 'Toilet and cistern repairs', 'Shower and vanity plumbing', 'Damaged or ageing pipework'],
+    overview: 'General plumbing repairs restore the fixtures, valves and pipework used throughout a home or property. A careful assessment separates worn components from wider supply or drainage faults so the repair addresses the cause rather than only the visible symptom.',
+    signs: ['Taps, showers or toilets that continue to leak', 'Low pressure at one or more fixtures', 'Water marks around cabinets, walls or floors', 'Noisy, loose or unreliable plumbing fixtures'],
+    expertise: ['Fixture and valve fault diagnosis', 'Repairs to accessible household pipework', 'Clear advice before parts are replaced'],
   },
   {
     slug: 'gas-fitting',
@@ -72,6 +84,9 @@ export const services = [
     description: 'Arrange licensed gas fitting for appliance connections, gas hot-water systems and suspected gas faults across the Hills District.',
     intro: 'Gas work must be handled by an appropriately licensed professional. If you suspect a gas leak, avoid flames or switches near the area, move to fresh air and call for advice.',
     details: ['Gas appliance connections', 'Gas hot-water pipework', 'Fault and leak assessment', 'Alterations to accessible gas lines'],
+    overview: 'Gas fitting covers regulated work on gas pipework, appliance connections and related systems. A licensed gas fitter checks the installation, confirms the agreed scope and completes applicable testing before connected equipment is returned to service.',
+    signs: ['A suspected gas smell near an appliance or line', 'An appliance connection that needs alteration', 'A gas hot-water system with supply concerns', 'Planned kitchen or appliance replacement work'],
+    expertise: ['Licensed gas appliance connections', 'Accessible gas-line fault assessment', 'Testing appropriate to the completed work'],
   },
   {
     slug: 'leak-detection',
@@ -84,6 +99,9 @@ export const services = [
     description: 'Investigate unexplained water use, damp areas and suspected hidden leaks with a licensed Hills District plumbing team.',
     intro: 'A hidden leak may show up as dampness, movement on the water meter, reduced pressure or an unexpected water bill. The right checks depend on the symptoms and the accessible plumbing.',
     details: ['Visible and concealed leak checks', 'Pressure and isolation testing', 'Moisture investigation where suitable', 'Repair planning after the source is narrowed down'],
+    overview: 'Water leak detection is the process of narrowing down unexplained water loss before unnecessary surfaces are disturbed. Evidence from the meter, pressure, moisture and accessible pipework helps identify the most useful next inspection or repair step.',
+    signs: ['Unexpected movement on the water meter', 'Damp patches, mould or unexplained moisture', 'Reduced pressure without an obvious fixture fault', 'An unusually high water bill or running-water sound'],
+    expertise: ['Pressure and isolation testing', 'Moisture investigation where appropriate', 'Targeted repair planning after the source is narrowed'],
   },
 ] as const;
 
@@ -179,6 +197,7 @@ export const reviews = [
 
 export const serviceFaqs = (name: string): Faq[] => [
   { question: `Can I arrange ${name.toLowerCase()} across the Hills District?`, answer: `Yes. Call with the full address and a clear description of the issue so coverage and current availability can be confirmed.` },
+  { question: `Which Hills District suburbs can I call about ${name.toLowerCase()}?`, answer: 'Priority service areas include Baulkham Hills, Kellyville, North Kellyville, Winston Hills, Rouse Hill and Beaumont Hills. Call with the full address so current coverage and availability can be confirmed.' },
   { question: 'Are urgent calls taken after hours?', answer: 'Urgent calls are taken 24 hours, 7 days a week. No arrival time is promised until the problem, location and current availability are reviewed.' },
   { question: 'Is the work licensed?', answer: 'Antons Enterprises Pty Ltd operates this service under NSW contractor licence 210933C. Regulated work is carried out under the applicable licence.' },
   { question: 'Should I send photos before the visit?', answer: 'Clear photos of the fixture, system or visible damage can help explain the issue, but they do not replace an on-site assessment where one is needed.' },
