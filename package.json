@@ -1,0 +1,26 @@
+{
+  "name": "the-hills-district-plumber-by-antons",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "check:site": "node scripts/check-site.mjs",
+    "check:performance": "node scripts/check-performance.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@fontsource/barlow": "^5.2.6",
+    "@fontsource/saira-extra-condensed": "^5.2.6",
+    "astro": "^5.13.7",
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.63.0"
+  }
+}
+
