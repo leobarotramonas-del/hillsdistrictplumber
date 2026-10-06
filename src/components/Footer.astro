@@ -7,7 +7,7 @@ import { areas, services, site } from '../data/site';
     <div class="footer-intro"><Brand /><p>Licensed plumbing for homes and properties across the Hills District. Urgent calls are taken 24 hours, 7 days a week.</p><a class="footer-phone" href={site.phoneHref}>{site.phoneDisplay}</a></div>
     <div><h2>Services</h2><ul>{services.map((service) => <li><a href={`/services/${service.slug}/`}>{service.name}</a></li>)}</ul></div>
     <div><h2>Service Areas</h2><ul>{areas.map((area) => <li><a href={`/service-areas/${area.slug}/`}>{area.name} {area.postcode}</a></li>)}</ul></div>
-    <div><h2>Company</h2><ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/terms/">Website Terms</a></li></ul></div>
+    <div><h2>Company</h2><ul><li><a href="/blog/">Plumbing Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/terms/">Website Terms</a></li></ul></div>
   </div>
   <div class="site-footer__legal"><p>Operated by {site.operator} · NSW contractor licence {site.licence}</p><p>© {new Date().getFullYear()} {site.name}</p></div>
 </footer>

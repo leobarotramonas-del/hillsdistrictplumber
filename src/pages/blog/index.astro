@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const formatDate = (date: Date) => new Intl.DateTimeFormat('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+---
+<BaseLayout title="Hills District Plumbing Advice & Guides" description="Read practical Hills District plumbing guides about blocked drains, leaks, hot-water systems, gas work and caring for household plumbing." canonicalPath="/blog/">
+  <section class="blog-hero"><div class="wrap"><h1>Hills District Plumbing Advice</h1><p>Clear guidance about common plumbing symptoms, property access and the questions worth asking before repair work begins.</p></div></section>
+  <section class="blog-index wrap" aria-labelledby="articles-title">
+    <div class="blog-index__heading"><h2 id="articles-title">Latest Plumbing Guides</h2><p>Articles are written to help Hills District property owners understand common plumbing problems without guessing at a cause or promising a repair before the system is assessed.</p></div>
+    {posts.length ? <div class="blog-feed">{posts.map((post) => <a class="blog-row" href={`/blog/${post.id}/`}><div class="blog-row__meta"><time datetime={post.data.publishDate.toISOString()}>{formatDate(post.data.publishDate)}</time><span>{post.data.category}</span></div><div><h2>{post.data.title}</h2><p>{post.data.description}</p></div><span class="blog-row__action">Read Article</span></a>)}</div> : <div class="blog-empty"><h2>Practical Articles Are on the Way</h2><p>New Hills District plumbing guides will appear here as they are published. For help with a current plumbing problem, call the team and describe what is happening at the property.</p></div>}
+  </section>
+</BaseLayout>

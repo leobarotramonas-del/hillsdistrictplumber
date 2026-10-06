@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const path = `/blog/${post.id}/`;
+const canonical = new URL(path, site.url).toString();
+const published = post.data.publishDate.toISOString();
+const modified = (post.data.updatedDate ?? post.data.publishDate).toISOString();
+const formatDate = (date: Date) => new Intl.DateTimeFormat('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+const schema = [
+  { '@type': 'BlogPosting', '@id': `${canonical}#article`, headline: post.data.title, description: post.data.description, datePublished: published, dateModified: modified, author: { '@type': 'Organization', name: post.data.author }, publisher: { '@id': `${site.url}/#business` }, mainEntityOfPage: { '@id': `${canonical}#webpage` }, ...(post.data.image ? { image: new URL(post.data.image, site.url).toString() } : {}) },
+  { '@type': 'BreadcrumbList', '@id': `${canonical}#breadcrumb`, itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` }, { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` }, { '@type': 'ListItem', position: 3, name: post.data.title, item: canonical }] },
+];
+---
+<BaseLayout title={post.data.title} description={post.data.description} canonicalPath={path} schema={schema} image={post.data.image} pageType="article" publishedTime={published} modifiedTime={modified}>
+  <article>
+    <header class="article-header"><div class="wrap"><a class="article-header__back" href="/blog/">Back to Plumbing Advice</a><h1>{post.data.title}</h1><p class="article-header__description">{post.data.description}</p><div class="article-meta"><span>{post.data.category}</span><time datetime={published}>Published {formatDate(post.data.publishDate)}</time>{post.data.updatedDate && <time datetime={modified}>Updated {formatDate(post.data.updatedDate)}</time>}<span>By {post.data.author}</span></div></div></header>
+    {post.data.image && <img class="article-image" src={post.data.image} width="1200" height="675" loading="eager" decoding="async" alt={post.data.imageAlt ?? ''} />}
+    <div class="article-body"><Content /></div>
+  </article>
+  <CtaBand title="Ask About a Plumbing Problem" />
+</BaseLayout>
