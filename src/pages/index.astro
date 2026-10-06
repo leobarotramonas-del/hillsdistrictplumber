@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResponsiveImage from '../components/ResponsiveImage.astro';
+import GoogleRating from '../components/GoogleRating.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { areas, homeFaqs, reviews, services, site } from '../data/site';
+
+const title = 'The Hills District Plumber by Antons';
+const description = 'Licensed Hills District plumbing for drains, hot water, leaks, gas fitting and repairs. Urgent calls are taken 24 hours, 7 days a week.';
+const faqSchema = { '@type': 'FAQPage', '@id': `${site.url}/#faq`, mainEntity: homeFaqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) };
+---
+<BaseLayout title={title} description={description} canonicalPath="/" schema={[faqSchema]}>
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="home-hero__grid">
+      <div class="home-hero__copy">
+        <p class="eyebrow">Licensed plumbing · NSW 210933C</p>
+        <h1 id="home-title">The Hills District’s Local Plumber</h1>
+        <p class="home-hero__lede">Practical plumbing help across the Hills District for blocked drains, hot water, leaks, gas fitting and everyday repairs—backed by more than 25 years of trade experience.</p>
+        <div class="home-hero__actions"><a class="button button--blue" href={site.phoneHref}>Call {site.phoneDisplay}</a><a class="button button--ghost" href="/services/">Explore services</a></div>
+        <p class="home-hero__note">Urgent calls are taken 24 hours, 7 days a week. Attendance is confirmed after we review the problem and address.</p>
+      </div>
+      <div class="home-hero__media">
+        <video autoplay muted loop playsinline preload="metadata" poster="/media/antons-hero-poster.webp" width="464" height="832" aria-label="Antons plumbing team at work">
+          <source src="/media/antons-hero.mp4" type="video/mp4" />
+        </video>
+        <button class="video-toggle" type="button" aria-label="Pause hero video">Ⅱ</button>
+        <div class="home-hero__rating"><GoogleRating /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="local-strip"><div class="local-strip__inner wrap"><h2>Need a Hills District Local Plumber?</h2><a class="button button--blue" href={site.phoneHref}>Call now</a></div></section>
+
+  <section class="home-section wrap" aria-labelledby="services-title">
+    <div class="section-heading"><div><p class="eyebrow">Hills District plumbing services</p><h2 id="services-title">Local Plumbing Help When You Need It</h2></div><p>From blocked drains in Baulkham Hills to hot-water and plumbing repairs across the Hills District, tell us what is happening and we’ll help arrange the right local service.</p></div>
+    <div class="service-grid">{services.map((service) => <article class="service-card"><ResponsiveImage src={service.image} small={service.imageSmall} alt={service.alt} /><div class="service-card__body"><p class="eyebrow">{service.short}</p><h3>{service.name}</h3><p>{service.intro}</p><a href={`/services/${service.slug}/`}>Learn More</a></div></article>)}</div>
+  </section>
+
+  <section class="experience"><div class="experience__grid wrap"><ResponsiveImage src="/images/team.webp" small="/images/team-420.webp" width={900} height={600} alt="Three Antons plumbers standing together in front of a blue service vehicle" /><div><p class="eyebrow">The people behind the service</p><h2>More Than 25 Years of Plumbing Experience</h2><p>The Hills District Plumber is operated by Antons Enterprises Pty Ltd. The service brings the established Antons team, practical trade experience and specialist plumbing equipment to local enquiries across the district.</p><p class="operator-line">NSW contractor licence {site.licence}</p><a class="button button--blue" href="/about/">Meet Antons</a></div></div></section>
+
+  <section class="home-section wrap" aria-labelledby="areas-title"><div class="section-heading"><div><p class="eyebrow">Our local service area</p><h2 id="areas-title">Hills District Suburbs We Serve</h2></div><p>We primarily serve these Hills District suburbs for blocked drains, hot water, leaks, gas fitting and general plumbing. Call with your address and plumbing issue to arrange local service.</p></div><div class="area-grid">{areas.map((area) => <a class="area-card" href={`/service-areas/${area.slug}/`}><span>{area.postcode}</span><h3>{area.name}</h3><p>Local plumbing services in {area.name}</p></a>)}</div></section>
+
+  <section class="home-section process" aria-labelledby="process-title"><div class="wrap"><p class="eyebrow">A clear repair process</p><h2 id="process-title">From First Call to Completed Work</h2><div class="process-grid"><article class="process-step"><h3>Tell Us the Problem</h3><p>Share the address, affected fixtures and any urgent safety concern.</p></article><article class="process-step"><h3>Confirm Access</h3><p>We review parking, strata, pets and equipment access where relevant.</p></article><article class="process-step"><h3>Assess the Cause</h3><p>The plumber inspects accessible plumbing and explains the practical options.</p></article><article class="process-step"><h3>Complete Agreed Work</h3><p>Approved repairs proceed and the outcome is explained clearly.</p></article></div></div></section>
+
+  <section class="home-section reviews" id="reviews" aria-labelledby="reviews-title"><review-carousel class="wrap"><div class="section-heading"><div><p class="eyebrow">Verified Google feedback</p><h2 id="reviews-title">What The Hills District Plumber Customers Say</h2></div><p>Read feedback from customers who trusted our plumbing team with work at their property. Follow the source link to view the original Google reviews.</p></div><div class="review-controls"><button type="button" data-prev aria-label="Previous reviews">←</button><button type="button" data-next aria-label="Next reviews">→</button></div><div class="review-track" data-track tabindex="0" aria-label="Customer review carousel">{reviews.map((review) => <figure><blockquote>“{review.text}”</blockquote><figcaption>{review.name}<br /><a href={site.reviewSourceUrl} target="_blank" rel="noopener noreferrer">Verified Google review</a></figcaption></figure>)}</div></review-carousel></section>
+
+  <FaqSection faqs={homeFaqs} title="Hills District Plumbing Questions" />
+  <CtaBand title="Need a Plumber in the Hills District?" />
+
+  <script>
+    const video = document.querySelector<HTMLVideoElement>('.home-hero video');
+    const toggle = document.querySelector<HTMLButtonElement>('.video-toggle');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) { video?.pause(); if (toggle) { toggle.textContent = '▶'; toggle.setAttribute('aria-label', 'Play hero video'); } }
+    toggle?.addEventListener('click', () => { if (!video) return; if (video.paused) { void video.play(); toggle.textContent = 'Ⅱ'; toggle.setAttribute('aria-label', 'Pause hero video'); } else { video.pause(); toggle.textContent = '▶'; toggle.setAttribute('aria-label', 'Play hero video'); } });
+    class ReviewCarousel extends HTMLElement {
+      connectedCallback() {
+        const track = this.querySelector<HTMLElement>('[data-track]'); const prev = this.querySelector<HTMLButtonElement>('[data-prev]'); const next = this.querySelector<HTMLButtonElement>('[data-next]');
+        const move = (direction: number) => track?.scrollBy({ left: direction * (track.clientWidth * .9), behavior: reduced ? 'auto' : 'smooth' });
+        prev?.addEventListener('click', () => move(-1)); next?.addEventListener('click', () => move(1));
+      }
+    }
+    if (!customElements.get('review-carousel')) customElements.define('review-carousel', ReviewCarousel);
+  </script>
+</BaseLayout>
+

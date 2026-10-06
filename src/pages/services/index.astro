@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services } from '../../data/site';
+---
+<BaseLayout title="Hills District Plumbing Services | Antons" description="Explore licensed Hills District plumbing, including blocked drains, hot water, repairs, gas fitting, leak detection and urgent help." canonicalPath="/services/">
+  <PageHero eyebrow="Licensed Hills District plumbing" title="Plumbing Services for Homes and Properties" intro="Choose the service that best matches the symptoms. If you are unsure, call and explain what you can see, hear or smell so the team can guide the next step." />
+  <section class="directory wrap"><div class="service-grid">{services.map((service) => <article class="service-card"><ResponsiveImage src={service.image} small={service.imageSmall} alt={service.alt} /><div class="service-card__body"><p class="eyebrow">{service.short}</p><h3>{service.name}</h3><p>{service.intro}</p><a href={`/services/${service.slug}/`}>Learn More</a></div></article>)}</div></section>
+  <CtaBand />
+</BaseLayout>
+

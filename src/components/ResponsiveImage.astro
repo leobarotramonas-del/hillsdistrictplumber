@@ -1,0 +1,6 @@
+---
+interface Props { src: string; small: string; alt: string; width?: number; height?: number; loading?: 'lazy' | 'eager'; class?: string }
+const { src, small, alt, width = 900, height = 900, loading = 'lazy', class: className } = Astro.props;
+---
+<img class={className} src={src} srcset={`${small} 480w, ${src} 900w`} sizes="(max-width: 720px) 100vw, 50vw" width={width} height={height} loading={loading} decoding="async" alt={alt} />
+

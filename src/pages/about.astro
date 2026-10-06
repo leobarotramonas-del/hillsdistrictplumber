@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ResponsiveImage from '../components/ResponsiveImage.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+---
+<BaseLayout title="About The Hills District Plumber by Antons" description="Meet the experienced Antons team behind The Hills District Plumber, operated by Antons Enterprises Pty Ltd under NSW contractor licence 210933C." canonicalPath="/about/" image="/images/team.webp">
+  <PageHero eyebrow="The Antons team" title="A Local Service Backed by Trade Experience" intro="The Hills District Plumber is the customer-facing local service of Antons Enterprises Pty Ltd, bringing more than 25 years of plumbing experience to enquiries across the district." />
+  <section class="content-section wrap"><div class="content-grid"><ResponsiveImage class="team-photo" src="/images/team.webp" small="/images/team-420.webp" width={900} height={600} alt="Three Antons plumbers standing together in front of a blue service vehicle" /><div><p class="eyebrow">Licensed and straightforward</p><h2>Plumbing Advice Grounded in the Actual Job</h2><p>The team starts with what is happening at the property, checks the accessible plumbing and explains the practical next step. We avoid unsupported promises about arrival times, prices or causes before the job details are understood.</p><p><strong>Operator:</strong> {site.operator}<br /><strong>NSW contractor licence:</strong> {site.licence}<br /><strong>Urgent calls:</strong> taken 24 hours, 7 days a week</p></div></div></section>
+  <CtaBand title="Talk with the Antons Team" />
+</BaseLayout>
+

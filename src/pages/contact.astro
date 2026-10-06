@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { areas, site } from '../data/site';
+---
+<BaseLayout title="Contact The Hills District Plumber" description="Call The Hills District Plumber by Antons on 0493 824 176 for licensed plumbing enquiries. Urgent calls are taken 24 hours, 7 days a week." canonicalPath="/contact/">
+  <PageHero eyebrow="Call Antons" title="Tell Us What Is Happening at the Property" intro="Share the full address, the affected fixtures, when the issue began and any parking, strata or access information. We’ll confirm coverage and current availability." />
+  <section class="content-section wrap"><div class="content-grid"><div><p class="eyebrow">Phone</p><h2><a href={site.phoneHref}>{site.phoneDisplay}</a></h2><p>Urgent calls are taken 24 hours, 7 days a week. An arrival time is not promised until the problem, address and current availability are reviewed.</p><p><strong>{site.operator}</strong><br />NSW contractor licence {site.licence}</p></div><div><p class="eyebrow">Priority areas</p><ul class="check-list">{areas.map((area) => <li><a href={`/service-areas/${area.slug}/`}>{area.name} {area.postcode}</a></li>)}</ul></div></div></section>
+</BaseLayout>
+

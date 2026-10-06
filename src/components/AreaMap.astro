@@ -1,0 +1,23 @@
+---
+interface Props { name: string; postcode: string }
+const { name, postcode } = Astro.props;
+const query = encodeURIComponent(`${name} NSW ${postcode}`);
+---
+<div class="map-placeholder" data-map data-query={query}>
+  <div data-map-prompt><p class="eyebrow">Map loads on request</p><h2>{name} {postcode}</h2><p>The interactive map is kept out of the initial page load.</p><button type="button">Load map</button></div>
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-map]').forEach((map) => {
+    const button = map.querySelector<HTMLButtonElement>('button');
+    button?.addEventListener('click', () => {
+      const query = map.dataset.query;
+      const iframe = document.createElement('iframe');
+      iframe.title = `Map of ${decodeURIComponent(query ?? '')}`;
+      iframe.loading = 'lazy';
+      iframe.referrerPolicy = 'no-referrer-when-downgrade';
+      iframe.src = `https://www.google.com/maps?q=${query}&output=embed`;
+      map.replaceChildren(iframe);
+    }, { once: true });
+  });
+</script>
+

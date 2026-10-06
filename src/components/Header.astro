@@ -1,0 +1,25 @@
+---
+import Brand from './Brand.astro';
+import GoogleRating from './GoogleRating.astro';
+import { site } from '../data/site';
+---
+<header class="site-header">
+  <div class="site-header__inner">
+    <Brand />
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/services/">Services</a>
+      <a href="/service-areas/">Service Areas</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <GoogleRating />
+    <div class="header-call"><small>NSW Licence {site.licence}</small><a href={site.phoneHref}>Call {site.phoneDisplay}</a></div>
+    <details class="mobile-menu">
+      <summary aria-label="Open navigation menu"><span></span><span></span><span></span></summary>
+      <nav aria-label="Mobile navigation">
+        <a href="/services/">Services</a><a href="/service-areas/">Service Areas</a><a href="/about/">About</a><a href="/contact/">Contact</a>
+      </nav>
+    </details>
+  </div>
+</header>
+

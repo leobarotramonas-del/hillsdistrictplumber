@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { serviceFaqs, services, site } from '../../data/site';
+
+export function getStaticPaths() { return services.map((service) => ({ params: { slug: service.slug }, props: { service } })); }
+const { service } = Astro.props;
+const path = `/services/${service.slug}/`;
+const faqs = serviceFaqs(service.name);
+const schema = [
+  { '@type': 'Service', '@id': `${site.url}${path}#service`, name: service.name, description: service.description, provider: { '@id': `${site.url}/#business` }, areaServed: { '@type': 'AdministrativeArea', name: site.place } },
+  { '@type': 'BreadcrumbList', '@id': `${site.url}${path}#breadcrumb`, itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` }, { '@type': 'ListItem', position: 2, name: 'Services', item: `${site.url}/services/` }, { '@type': 'ListItem', position: 3, name: service.name, item: `${site.url}${path}` }] },
+  { '@type': 'FAQPage', '@id': `${site.url}${path}#faq`, mainEntity: faqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) },
+];
+---
+<BaseLayout title={service.title} description={service.description} canonicalPath={path} schema={schema} image={service.image}>
+  <PageHero eyebrow="Hills District plumbing service" title={service.name} intro={service.intro} />
+  <section class="content-section wrap"><div class="content-grid"><ResponsiveImage src={service.image} small={service.imageSmall} alt={service.alt} /><div><p class="eyebrow">How we can help</p><h2>Start with a Careful Assessment</h2><p>The cause, access and condition of the surrounding plumbing are reviewed before a repair approach is recommended. Regulated work is completed by the Antons team operating under NSW contractor licence {site.licence}.</p><ul class="check-list">{service.details.map((item) => <li>{item}</li>)}</ul></div></div></section>
+  <FaqSection faqs={faqs} title={`${service.name} questions`} />
+  <CtaBand title={`Ask about ${service.name.toLowerCase()}`} />
+</BaseLayout>
+

@@ -1,0 +1,10 @@
+---
+import { site } from '../data/site';
+interface Props { dark?: boolean }
+const { dark = false } = Astro.props;
+---
+<a class:list={['google-rating', { 'google-rating--dark': dark }]} href={site.reviewSourceUrl} target="_blank" rel="noopener noreferrer" aria-label="Read five-star Google reviews for The Hills District Plumber">
+  <span class="google-rating__g" aria-hidden="true">G</span>
+  <span><strong>5 Star Rated</strong><span class="google-rating__stars" aria-hidden="true">★★★★★</span></span>
+</a>
+

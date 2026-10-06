@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
+import AreaMap from '../../components/AreaMap.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { areas, services, site } from '../../data/site';
+
+export function getStaticPaths() { return areas.map((area) => ({ params: { slug: area.slug }, props: { area } })); }
+const { area } = Astro.props;
+const path = `/service-areas/${area.slug}/`;
+const neighbours = area.neighbours
+  .map((slug) => areas.find((candidate) => candidate.slug === slug))
+  .filter((candidate): candidate is NonNullable<typeof candidate> => Boolean(candidate));
+const schema = [
+  { '@type': 'BreadcrumbList', '@id': `${site.url}${path}#breadcrumb`, itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` }, { '@type': 'ListItem', position: 2, name: 'Service Areas', item: `${site.url}/service-areas/` }, { '@type': 'ListItem', position: 3, name: area.name, item: `${site.url}${path}` }] },
+  { '@type': 'FAQPage', '@id': `${site.url}${path}#faq`, mainEntity: area.faqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) },
+];
+---
+<BaseLayout title={area.title} description={area.description} canonicalPath={path} schema={schema} image={area.image}>
+  <PageHero eyebrow={`${area.name} NSW ${area.postcode}`} title={`Licensed Plumber in ${area.name}`} intro={area.intro} />
+  <section class="content-section wrap"><div class="content-grid"><ResponsiveImage src={area.image} small={area.imageSmall} alt={area.alt} /><div><p class="eyebrow">Property and access context</p><h2>Useful Details Before the Visit</h2><p>{area.context}</p><p>Ask the caller for the full street address so coverage and current availability can be confirmed. We do not claim every address can be attended or promise an arrival time before those details are reviewed.</p><div class="area-facts"><div><strong>Suburb</strong><span>{area.name}</span></div><div><strong>Postcode</strong><span>{area.postcode}</span></div><div><strong>Licence</strong><span>{site.licence}</span></div></div></div></div></section>
+  <section class="content-section wrap"><div class="content-grid"><div><p class="eyebrow">Relevant services</p><h2>Plumbing Support for Common Faults</h2><div class="card-list">{services.slice(0, 4).map((service) => <a class="route-card" href={`/services/${service.slug}/`}><h3>{service.name}</h3><p>{service.short}</p></a>)}</div></div><AreaMap name={area.name} postcode={area.postcode} /></div></section>
+  <section class="content-section wrap"><p class="eyebrow">Nearby priority areas</p><h2>Other Confirmed Coverage Pages</h2><div class="card-list">{neighbours.map((neighbour) => <a class="route-card" href={`/service-areas/${neighbour.slug}/`}><h3>{neighbour.name} {neighbour.postcode}</h3><p>View local plumbing information and address confirmation guidance.</p></a>)}</div></section>
+  <FaqSection faqs={area.faqs} title={`${area.name} plumbing questions`} />
+  <CtaBand title={`Need a plumber in ${area.name}?`} />
+</BaseLayout>
+

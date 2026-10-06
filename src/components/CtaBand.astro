@@ -1,0 +1,7 @@
+---
+import { site } from '../data/site';
+interface Props { title?: string; text?: string }
+const { title = 'Tell us what is happening', text = 'Call with the full address, property type and a short description of the plumbing problem. We’ll confirm coverage and current availability.' } = Astro.props;
+---
+<section class="cta-band"><div><p class="eyebrow">Speak with Antons</p><h2>{title}</h2><p>{text}</p></div><a class="button button--blue" href={site.phoneHref}>Call {site.phoneDisplay}</a></section>
+

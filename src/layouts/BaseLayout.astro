@@ -1,0 +1,75 @@
+---
+import '@fontsource/barlow/400.css';
+import '@fontsource/barlow/600.css';
+import '@fontsource/barlow/700.css';
+import '@fontsource/saira-extra-condensed/700.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileCallBar from '../components/MobileCallBar.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown>[];
+  image?: string;
+}
+
+const { title, description, canonicalPath, noindex = false, schema = [], image } = Astro.props;
+const path = canonicalPath === '/' ? '/' : `${canonicalPath.replace(/\/$/, '')}/`;
+const canonical = new URL(path, site.url).toString();
+const socialImage = image ? new URL(image, site.url).toString() : undefined;
+const businessId = `${site.url}/#business`;
+const websiteId = `${site.url}/#website`;
+const pageId = `${canonical}#webpage`;
+const baseGraph = [
+  {
+    '@type': 'Plumber', '@id': businessId, name: site.name, legalName: site.operator,
+    url: site.url, telephone: '+61493824176', areaServed: { '@type': 'AdministrativeArea', name: site.place },
+    identifier: { '@type': 'PropertyValue', name: 'NSW contractor licence', value: site.licence },
+  },
+  { '@type': 'WebSite', '@id': websiteId, url: `${site.url}/`, name: site.name, publisher: { '@id': businessId }, inLanguage: 'en-AU' },
+  { '@type': 'WebPage', '@id': pageId, url: canonical, name: title, description, isPartOf: { '@id': websiteId }, about: { '@id': businessId }, inLanguage: 'en-AU' },
+];
+const jsonLd = { '@context': 'https://schema.org', '@graph': [...baseGraph, ...schema] };
+---
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="geo.region" content="AU-NSW" />
+    <meta name="geo.placename" content={site.place} />
+    <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large'} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en-AU" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_AU" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={site.name} />
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    <meta name="twitter:card" content={socialImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <Header />
+    <main id="main-content"><slot /></main>
+    <Footer />
+    <MobileCallBar />
+  </body>
+</html>
+

@@ -1,0 +1,11 @@
+User-agent: AhrefsSiteAudit
+Allow: /
+
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://thehillsdistrictplumber.com.au/sitemap.xml
+
