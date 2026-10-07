@@ -19,7 +19,9 @@ for (const file of media) {
   if (['.mp4', '.webm'].includes(ext) && size > 4_500_000) errors.push(`${path.relative(dist, file)}: hero video exceeds 4.5 MB (${size} bytes)`);
 }
 const home = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
-if (!/<video[^>]*preload="metadata"[^>]*poster="\/media\/antons-hero-poster\.webp"/i.test(home)) errors.push('home: hero video must use metadata preload and local poster');
+if (!/<link[^>]*rel="preload"[^>]*href="\/media\/antons-hero-poster\.webp"[^>]*fetchpriority="high"/i.test(home)) errors.push('home: hero poster must be preloaded at high priority');
+if (!/<video[^>]*preload="none"[^>]*poster="\/media\/antons-hero-poster\.webp"/i.test(home)) errors.push('home: hero video must defer loading and use the local poster');
+if (!/<source[^>]*data-src="\/media\/antons-hero\.mp4"[^>]*type="video\/mp4"/i.test(home)) errors.push('home: hero video source must be attached after initial rendering');
 if (!/<video[^>]*width="464"[^>]*height="832"/i.test(home)) errors.push('home: hero video needs explicit dimensions');
 if (/home-hero[^]*?<img/i.test(home.split('</section>')[0] ?? '')) errors.push('home: separate image found in hero section');
 if (errors.length) { console.error(errors.join('\n')); process.exit(1); }

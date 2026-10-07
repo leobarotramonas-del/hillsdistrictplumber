@@ -54,6 +54,7 @@ const jsonLd = { '@context': 'https://schema.org', '@graph': [...baseGraph, ...s
     <link rel="alternate" hreflang="en-AU" href={canonical} />
     <link rel="alternate" hreflang="x-default" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {path === '/' && <link rel="preload" as="image" href="/media/antons-hero-poster.webp" fetchpriority="high" />}
     <meta property="og:type" content={pageType} />
     <meta property="og:locale" content="en_AU" />
     <meta property="og:title" content={title} />

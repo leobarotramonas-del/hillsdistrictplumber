@@ -7,7 +7,10 @@
   Cache-Control: public, max-age=31536000, immutable
 
 /media/*
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
 
 https://:version.:subdomain.workers.dev/*
   X-Robots-Tag: noindex, nofollow
@@ -17,4 +20,3 @@ https://:project.pages.dev/*
 
 https://:branch.:project.pages.dev/*
   X-Robots-Tag: noindex, nofollow
-
