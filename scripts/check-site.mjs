@@ -68,20 +68,19 @@ for (const legal of ['/privacy/', '/terms/']) {
 const sitemap = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
 const pageSitemap = fs.readFileSync(path.join(root, 'page-sitemap.xml'), 'utf8');
 const postSitemap = fs.readFileSync(path.join(root, 'post-sitemap.xml'), 'utf8');
-for (const required of [`${canonicalBase}/page-sitemap.xml`, `${canonicalBase}/post-sitemap.xml`]) if (!sitemap.includes(`<loc>${required}</loc>`)) errors.push(`sitemap index: missing ${required}`);
+const rootSitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const pageSitemapUrls = [...pageSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const postSitemapUrls = [...postSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-const sitemapUrls = [...pageSitemapUrls, ...postSitemapUrls];
 for (const urlPath of pages.keys()) {
   if (urlPath === '/404/') continue;
   const absolute = new URL(urlPath, canonicalBase).toString();
-  const count = sitemapUrls.filter((url) => url === absolute).length;
-  if (count !== 1) errors.push(`${urlPath}: sitemap count ${count}`);
+  const count = rootSitemapUrls.filter((url) => url === absolute).length;
+  if (count !== 1) errors.push(`${urlPath}: root sitemap count ${count}`);
   const isPost = urlPath.startsWith('/blog/') && urlPath !== '/blog/';
   if (isPost && !postSitemapUrls.includes(absolute)) errors.push(`${urlPath}: missing from post sitemap`);
   if (!isPost && !pageSitemapUrls.includes(absolute)) errors.push(`${urlPath}: missing from page sitemap`);
 }
-if (sitemapUrls.some((url) => url.includes('/404/'))) errors.push('sitemaps: 404 must be excluded');
+if (rootSitemapUrls.some((url) => url.includes('/404/'))) errors.push('root sitemap: 404 must be excluded');
 const robots = fs.readFileSync(path.join(root, 'robots.txt'), 'utf8');
 for (const required of ['User-agent: AhrefsSiteAudit', 'User-agent: AhrefsBot', 'Sitemap: https://thehillsdistrictplumber.com.au/sitemap.xml']) if (!robots.includes(required)) errors.push(`robots.txt: missing ${required}`);
 if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
