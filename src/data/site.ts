@@ -1,6 +1,5 @@
 export const site = {
   name: 'The Hills District Plumber',
-  association: 'by Antons',
   operator: 'Antons Enterprises Pty Ltd',
   licence: '210933C',
   phoneDisplay: '0493 824 176',
@@ -116,7 +115,7 @@ const commonAreaFaqs = (name: string): Faq[] => [
 
 export const areas = [
   {
-    slug: 'baulkham-hills', name: 'Baulkham Hills', postcode: '2153', population: '37,415',
+    slug: 'baulkham-hills', name: 'Baulkham Hills', postcode: '2153',
     title: 'Plumber Baulkham Hills NSW 2153 | Antons',
     description: 'Call a licensed Baulkham Hills plumber for drains, leaks, hot water, gas fitting and repairs. Ask us to confirm availability for your address.',
     intro: 'Baulkham Hills includes established detached homes, townhouses, apartments and busy commercial properties. Access, shared services and the age of the plumbing can shape how a job is assessed.',
@@ -126,17 +125,17 @@ export const areas = [
     neighbours: ['winston-hills', 'kellyville'], faqs: commonAreaFaqs('Baulkham Hills'),
   },
   {
-    slug: 'kellyville', name: 'Kellyville', postcode: '2155', population: '27,011',
+    slug: 'kellyville', name: 'Kellyville', postcode: '2155',
     title: 'Plumber Kellyville NSW 2155 | Antons',
     description: 'Arrange licensed plumbing in Kellyville for blocked drains, leaks, hot water, gas fitting and household repairs. Call to confirm local availability.',
     intro: 'Kellyville has a mix of established streets, newer estates and larger family homes. Outdoor pipe routes, easements and service access are useful details when arranging drainage or leak work.',
     context: 'Let the team know about side access, landscaping, retaining walls and any recent building work near the affected plumbing. These details help plan equipment and inspection safely.',
     image: '/images/area-kellyville.webp', imageSmall: '/images/area-kellyville-640.webp',
     alt: 'Antons fleet of blue plumbing vehicles in an outdoor parking area',
-    neighbours: ['north-kellyville', 'beaumont-hills'], faqs: commonAreaFaqs('Kellyville'),
+    neighbours: ['north-kellyville', 'castle-hill'], faqs: commonAreaFaqs('Kellyville'),
   },
   {
-    slug: 'north-kellyville', name: 'North Kellyville', postcode: '2155', population: '17,401',
+    slug: 'north-kellyville', name: 'North Kellyville', postcode: '2155',
     title: 'Plumber North Kellyville NSW 2155 | Antons',
     description: 'Call a licensed North Kellyville plumber for drain, leak, hot-water, gas and repair enquiries. Provide your full address to confirm coverage.',
     intro: 'North Kellyville is characterised by newer homes, active construction and compact estate layouts. Clear driveway or side access can matter when drainage equipment is needed.',
@@ -146,7 +145,7 @@ export const areas = [
     neighbours: ['kellyville', 'rouse-hill'], faqs: commonAreaFaqs('North Kellyville'),
   },
   {
-    slug: 'winston-hills', name: 'Winston Hills', postcode: '2153', population: '12,123',
+    slug: 'winston-hills', name: 'Winston Hills', postcode: '2153',
     title: 'Plumber Winston Hills NSW 2153 | Antons',
     description: 'Book licensed plumbing in Winston Hills for blocked drains, leaking fixtures, hot water, gas fitting and repairs. Call to confirm attendance.',
     intro: 'Winston Hills has many established homes where original and upgraded plumbing can sit side by side. The location of isolation points and previous alterations can be important during diagnosis.',
@@ -156,30 +155,30 @@ export const areas = [
     neighbours: ['baulkham-hills', 'kellyville'], faqs: commonAreaFaqs('Winston Hills'),
   },
   {
-    slug: 'rouse-hill', name: 'Rouse Hill', postcode: '2155', population: '11,349',
+    slug: 'rouse-hill', name: 'Rouse Hill', postcode: '2155',
     title: 'Plumber Rouse Hill NSW 2155 | Antons',
     description: 'Contact a licensed Rouse Hill plumber about drains, leaks, hot water, gas fitting and general repairs. Share the address to confirm service coverage.',
     intro: 'Rouse Hill includes detached homes, townhouses, apartments and growing mixed-use areas. Visitor access, basement parking and shared services should be mentioned when booking.',
     context: 'For multi-residential buildings, check the building or strata access process before attendance. For homes, describe outside access and where the symptoms are appearing.',
     image: '/images/area-rouse-hill.webp', imageSmall: '/images/area-rouse-hill-640.webp',
     alt: 'Antons plumber adjusting a handheld shower connection',
-    neighbours: ['north-kellyville', 'beaumont-hills'], faqs: commonAreaFaqs('Rouse Hill'),
+    neighbours: ['north-kellyville', 'castle-hill'], faqs: commonAreaFaqs('Rouse Hill'),
   },
   {
-    slug: 'beaumont-hills', name: 'Beaumont Hills', postcode: '2155', population: '9,041',
-    title: 'Plumber Beaumont Hills NSW 2155 | Antons',
-    description: 'Arrange licensed plumbing in Beaumont Hills for blocked drains, leaks, hot water, gas and home repairs. Ask us to confirm your address is covered.',
-    intro: 'Beaumont Hills is largely residential, with family homes, landscaped yards and sloping blocks. Access around the home and the route of outside services can affect inspection planning.',
-    context: 'Mention retaining walls, limited side access or recent landscaping near the affected line. For internal faults, identify the rooms and fixtures showing symptoms.',
-    image: '/images/area-beaumont-hills.webp', imageSmall: '/images/area-beaumont-hills-640.webp',
-    alt: 'Antons plumber using a powered drain-cleaning tool at a basin',
-    neighbours: ['kellyville', 'rouse-hill'], faqs: commonAreaFaqs('Beaumont Hills'),
+    slug: 'castle-hill', name: 'Castle Hill', postcode: '2154',
+    title: 'Plumber Castle Hill NSW 2154 | Antons',
+    description: 'Arrange licensed plumbing in Castle Hill for blocked drains, leaks, hot water, gas fitting and property repairs. Call to confirm local availability.',
+    intro: 'Castle Hill includes established homes, apartments, commercial properties and busy town-centre streets. Parking, shared services and building access are useful details when arranging plumbing work.',
+    context: 'For apartments, strata or commercial properties, confirm parking, loading access and any building approval needed to reach shared plumbing. For houses, mention side access, mature trees and where the symptoms appear.',
+    image: '/images/team.webp', imageSmall: '/images/team-420.webp',
+    alt: 'Three licensed Antons plumbers standing with a blue service vehicle',
+    neighbours: ['baulkham-hills', 'kellyville'], faqs: commonAreaFaqs('Castle Hill'),
   },
 ] as const;
 
 export const homeFaqs: Faq[] = [
   { question: 'Are urgent plumbing calls answered after hours?', answer: 'Yes. Urgent calls are taken 24 hours, 7 days a week. The team will ask about the fault, safety concerns, address and access before confirming the next available response.' },
-  { question: 'Which Hills District suburbs do you cover?', answer: 'Priority coverage includes Baulkham Hills, Kellyville, North Kellyville, Winston Hills, Rouse Hill and Beaumont Hills. Call with your full address so current availability can be confirmed.' },
+  { question: 'Which Hills District suburbs do you cover?', answer: 'Priority coverage includes Baulkham Hills, Castle Hill, Kellyville, North Kellyville, Winston Hills and Rouse Hill. Call with your full address so current availability can be confirmed.' },
   { question: 'Are you a licensed plumbing business?', answer: 'Yes. Antons Enterprises Pty Ltd operates The Hills District Plumber by Antons under NSW contractor licence 210933C.' },
   { question: 'Do you promise a set arrival time?', answer: 'No arrival time is promised before the problem, address and current schedule are reviewed. The team will provide the clearest available timing when the booking is discussed.' },
   { question: 'Can you help with both drains and hot water?', answer: 'Yes. The services include blocked drains, hot-water systems, general plumbing repairs, gas fitting, leak detection and urgent plumbing faults.' },
@@ -197,7 +196,7 @@ export const reviews = [
 
 export const serviceFaqs = (name: string): Faq[] => [
   { question: `Can I arrange ${name.toLowerCase()} across the Hills District?`, answer: `Yes. Call with the full address and a clear description of the issue so coverage and current availability can be confirmed.` },
-  { question: `Which Hills District suburbs can I call about ${name.toLowerCase()}?`, answer: 'Priority service areas include Baulkham Hills, Kellyville, North Kellyville, Winston Hills, Rouse Hill and Beaumont Hills. Call with the full address so current coverage and availability can be confirmed.' },
+  { question: `Which Hills District suburbs can I call about ${name.toLowerCase()}?`, answer: 'Priority service areas include Baulkham Hills, Castle Hill, Kellyville, North Kellyville, Winston Hills and Rouse Hill. Call with the full address so current coverage and availability can be confirmed.' },
   { question: 'Are urgent calls taken after hours?', answer: 'Urgent calls are taken 24 hours, 7 days a week. No arrival time is promised until the problem, location and current availability are reviewed.' },
   { question: 'Is the work licensed?', answer: 'Antons Enterprises Pty Ltd operates this service under NSW contractor licence 210933C. Regulated work is carried out under the applicable licence.' },
   { question: 'Should I send photos before the visit?', answer: 'Clear photos of the fixture, system or visible damage can help explain the issue, but they do not replace an on-site assessment where one is needed.' },

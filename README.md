@@ -1,6 +1,6 @@
 # The Hills District Plumber
 
-Production-ready Astro 5 static website for **The Hills District Plumber by Antons**.
+Production-ready Astro 5 static website for **The Hills District Plumber**.
 
 ## Local development
 

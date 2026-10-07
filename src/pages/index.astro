@@ -32,7 +32,7 @@ const faqSchema = { '@type': 'FAQPage', '@id': `${site.url}/#faq`, mainEntity: h
   <section class="local-strip"><div class="local-strip__inner wrap"><h2>Need a Hills District Local Plumber?</h2><a class="button button--blue" href={site.phoneHref}>Call now</a></div></section>
 
   <section class="home-section wrap" aria-labelledby="services-title">
-    <div class="section-heading"><h2 id="services-title">Hills District Plumbing Help When You Need It</h2><p>From Baulkham Hills and Kellyville to North Kellyville, Winston Hills, Rouse Hill and Beaumont Hills, our licensed team helps with blocked drains, hot-water systems, leaks, gas fitting and everyday plumbing repairs.</p></div>
+    <div class="section-heading"><h2 id="services-title">Hills District Plumbing Help When You Need It</h2><p>From Baulkham Hills and Castle Hill to Kellyville, North Kellyville, Winston Hills and Rouse Hill, our licensed team helps with blocked drains, hot-water systems, leaks, gas fitting and everyday plumbing repairs.</p></div>
     <div class="service-grid">{services.map((service) => <article class="service-card"><ResponsiveImage src={service.image} small={service.imageSmall} alt={service.alt} /><div class="service-card__body"><p class="service-card__label">{service.short}</p><h3>{service.name}</h3><p>{service.intro}</p><a href={`/services/${service.slug}/`}>Learn More</a></div></article>)}</div>
   </section>
 
