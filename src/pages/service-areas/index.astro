@@ -2,11 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { areas } from '../../data/site';
+import { areas, services } from '../../data/site';
 ---
 <BaseLayout title="Hills District Plumbing Service Areas" description="View priority Hills District plumbing coverage in Baulkham Hills, Castle Hill, Kellyville, North Kellyville, Winston Hills and Rouse Hill." canonicalPath="/service-areas/">
   <PageHero eyebrow="Our local service area" title="Plumbing Across the Hills District" intro="We primarily serve the Hills District suburbs below for blocked drains, hot water, leaks, gas fitting and general plumbing. Call with your full address and plumbing issue to arrange local service." image={areas[0].image} imageSmall={areas[0].imageSmall} imageAlt={areas[0].alt} />
   <section class="directory wrap"><div class="card-list">{areas.map((area) => <a class="route-card" href={`/service-areas/${area.slug}/`}><p class="eyebrow">Hills District · {area.postcode}</p><h2>{area.name}</h2><p>{area.intro}</p><strong>View local plumbing services</strong></a>)}</div></section>
+  <section class="content-section wrap" aria-labelledby="area-services-title"><div class="section-heading"><h2 id="area-services-title">Services Available Across Our Local Area</h2><p>Explore the plumbing service that best matches your symptoms, then call with the complete property address to confirm coverage and availability.</p></div><div class="card-list">{services.map((service) => <a class="route-card" href={`/services/${service.slug}/`}><p class="eyebrow">{service.short}</p><h3>{service.name}</h3><p>{service.intro}</p></a>)}</div></section>
   <CtaBand title="Check Your Hills District Address" />
 </BaseLayout>
 

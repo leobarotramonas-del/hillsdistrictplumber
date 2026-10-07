@@ -15,6 +15,7 @@ walk(root);
 const errors = [];
 const canonicalBase = 'https://thehillsdistrictplumber.com.au';
 const pages = new Map();
+const incomingLinks = new Map();
 const strip = (value) => value.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<style[\s\S]*?<\/style>/gi, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const attr = (html, tag, name) => [...html.matchAll(new RegExp(`<${tag}\\b[^>]*\\b${name}=["']([^"']*)["'][^>]*>`, 'gi'))].map((match) => match[1]);
 
@@ -57,12 +58,18 @@ for (const [urlPath, html] of pages) {
     if (!clean) continue;
     if (!clean.endsWith('/') && !clean.includes('.')) errors.push(`${urlPath}: internal link missing trailing slash ${href}`);
     if (clean.endsWith('/') && !pages.has(clean)) errors.push(`${urlPath}: broken internal link ${href}`);
+    if (clean.endsWith('/') && pages.has(clean) && clean !== urlPath) {
+      const sources = incomingLinks.get(clean) ?? new Set();
+      sources.add(urlPath);
+      incomingLinks.set(clean, sources);
+    }
   }
 }
 
-for (const legal of ['/privacy/', '/terms/']) {
-  const incoming = [...pages.values()].filter((html) => html.includes(`href="${legal}"`)).length;
-  if (incoming < 1) errors.push(`${legal}: orphan page`);
+for (const [urlPath, html] of pages) {
+  if (urlPath === '/' || urlPath === '/404/' || html.includes('noindex,nofollow')) continue;
+  const incoming = incomingLinks.get(urlPath)?.size ?? 0;
+  if (incoming < 1) errors.push(`${urlPath}: orphan page with no incoming internal link`);
 }
 
 const sitemap = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
