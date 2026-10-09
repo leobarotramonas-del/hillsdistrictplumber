@@ -16,7 +16,7 @@ const schema = [
   { '@type': 'FAQPage', '@id': `${site.url}${path}#faq`, mainEntity: faqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) },
 ];
 ---
-<BaseLayout title={service.title} description={service.description} canonicalPath={path} schema={schema} image={service.image}>
+<BaseLayout title={service.title} description={service.description} canonicalPath={path} schema={schema} image={service.image} imageAlt={service.alt}>
   <PageHero eyebrow="Hills District plumbing service" title={service.name} intro={service.intro} image={service.image} imageSmall={service.imageSmall} imageAlt={service.alt} />
   <section class="content-section wrap service-overview"><div class="content-grid"><div class="detail-copy"><h2>What Is {service.name}?</h2><p>{service.overview}</p><p>Across the Hills District, the Antons team assesses the visible symptoms, accessible plumbing and property conditions before recommending work.</p></div><div class="service-scope"><h3>{service.name} Services</h3><ul class="check-list">{service.details.map((item) => <li>{item}</li>)}</ul></div></div></section>
   <section class="content-section service-signs"><div class="wrap"><div class="section-heading"><h2>Signs You May Need {service.name}</h2><p>These symptoms can indicate a plumbing fault worth assessing. The cause cannot be confirmed from a symptom alone, so the next step depends on the affected fixtures, access and condition of the system.</p></div><div class="signal-list">{service.signs.map((item) => <p>{item}</p>)}</div></div></section>

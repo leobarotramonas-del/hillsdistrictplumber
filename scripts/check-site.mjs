@@ -29,6 +29,20 @@ for (const file of htmlFiles) {
   const canonical = html.match(/<link rel="canonical" href="([^"]*)"/i)?.[1] ?? '';
   const expected = new URL(urlPath, canonicalBase).toString();
   const is404 = urlPath === '/404/';
+  const socialTags = new Map([...html.matchAll(/<meta (?:property|name)="((?:og|twitter):[^"]+)" content="([^"]*)"/g)].map((match) => [match[1], match[2]]));
+  for (const key of ['og:title', 'og:type', 'og:url', 'og:description', 'og:image', 'og:image:alt', 'twitter:card', 'twitter:title', 'twitter:description', 'twitter:image', 'twitter:image:alt']) {
+    if (!socialTags.get(key)) errors.push(`${urlPath}: missing ${key}`);
+  }
+  if (socialTags.get('og:url') !== expected) errors.push(`${urlPath}: OG URL differs from canonical`);
+  if (socialTags.get('twitter:card') !== 'summary_large_image') errors.push(`${urlPath}: missing large-image card`);
+  if (socialTags.get('og:image') !== socialTags.get('twitter:image')) errors.push(`${urlPath}: inconsistent social images`);
+  for (const key of ['og:image', 'twitter:image']) {
+    try {
+      const imageUrl = new URL(socialTags.get(key));
+      if (imageUrl.protocol !== 'https:') errors.push(`${urlPath}: ${key} must use HTTPS`);
+      if (imageUrl.origin === canonicalBase && !fs.existsSync(path.join(root, decodeURIComponent(imageUrl.pathname)))) errors.push(`${urlPath}: missing social image file`);
+    } catch { errors.push(`${urlPath}: invalid ${key} URL`); }
+  }
   if (title.length < 30 || title.length > 60) errors.push(`${urlPath}: title length ${title.length}`);
   if (description.length < 100 || description.length > 150) errors.push(`${urlPath}: description length ${description.length}`);
   if (canonical !== expected) errors.push(`${urlPath}: canonical ${canonical} should be ${expected}`);
