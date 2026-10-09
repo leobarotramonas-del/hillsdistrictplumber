@@ -1,17 +1,17 @@
 ---
-title: "Book Water Leak Detection in the Hills District"
-description: "Unexplained water use or damp patches? Learn what a Hills District leak detection visit involves, what to prepare and how to arrange an assessment."
+title: "Hidden Water Leak? Find the Source Before Opening Walls"
+description: "A damp patch is not a leak location. Our Hills District water leak detection approach starts with the evidence before access and repairs are planned."
 publishDate: 2026-10-09
 author: "The Hills District Plumber"
 category: "Booking Advice"
 draft: false
 ---
 
-A higher water bill or a damp patch can leave you unsure which service to book. The issue might involve a visible fixture, concealed plumbing or something outside the water supply system. Paying for repairs before the source is understood can mean disturbing the wrong area.
+A damp patch tells us where you can see moisture. It does not tell us exactly where the problem starts. That is the distinction we want to establish before discussing opening a wall, lifting paving or approving a concealed-pipe repair. Investigation and repair are separate decisions, even when you want the problem resolved quickly.
 
-Our [Hills District leak detection service](/services/leak-detection/) helps investigate unexplained water loss and plan the next step. Before booking, gather a few observations and ask how the assessment will narrow the possible source.
+When you contact our [Hills District leak detection team](/services/leak-detection/), start with what you can see and when it happens. We use those observations to plan the next assessment, rather than treating a higher bill or wet surface as a confirmed diagnosis.
 
-### Decide Whether You Need Detection or a Visible Repair
+### Can You See the Leak, or Only Its Effects?
 
 If you can clearly see a tap dripping or water escaping from an accessible connection, describe that first. A targeted [plumbing repair](/services/plumbing-repairs/) may be the appropriate starting point.
 
@@ -19,9 +19,9 @@ Leak detection is more relevant when the source is uncertain. Examples include w
 
 Tell the team if water is spreading quickly or approaching electrical equipment. Keep clear of electrical hazards and explain the urgency when calling. Where there is immediate danger, prioritise emergency assistance rather than a routine booking.
 
-### Gather Observations Without Opening Walls
+### Tell Us What Changes After Rain or Water Use
 
-You do not need to expose pipework before requesting help. In fact, opening surfaces without knowing where to investigate can increase disruption and still miss the source.
+Please do not expose pipework to prepare for our visit. We would rather start with your observations than an opening made on a guess. Disturbing a surface before narrowing the source can add disruption without answering the original question.
 
 Prepare the following information:
 
@@ -36,15 +36,15 @@ Sydney Water's [leak detection guidance](https://www.sydneywater.com.au/your-hom
 
 For shared meters, rentals or strata properties, explain the arrangement before interpreting readings or arranging access.
 
-### What the Initial Assessment Can Include
+### What We Can Establish Before Discussing Access
 
-The plumber starts with the symptoms, accessible plumbing and available isolation points. Depending on the circumstances, pressure checks, isolation testing or moisture investigation may help narrow the area requiring further attention.
+We start with the symptoms, accessible plumbing and available isolation points. Depending on the installation, pressure checks, isolation testing or moisture investigation may help narrow the next step. The useful question is what each check establishes, not simply which equipment is available.
 
 Ask what the proposed visit covers. It should distinguish investigation from the repair itself and explain any access limits. A concealed line may require additional work before a repair can be scoped, even after the likely area has been narrowed.
 
 For homes in [North Kellyville](/service-areas/north-kellyville/), mention recent construction, plans or builder information that may help explain the pipe routes. For [Winston Hills properties](/service-areas/winston-hills/), previous alterations and the location of accessible valves are useful details to share.
 
-### Questions to Ask Before Approving Work
+### What Does the Detection Visit Include?
 
 A clear conversation helps you understand what you are authorising and what a successful investigation can reasonably establish.
 
@@ -61,7 +61,7 @@ No method should be presented as a universal guarantee that every concealed leak
 
 You can independently review contractor details through the [Service NSW licence check](https://www.service.nsw.gov.au/transaction/check-a-builder-or-tradesperson-licence) before approving the work.
 
-### Keep Repair and Reinstatement Decisions Clear
+### Finding a Leak and Making Good Are Different Jobs
 
 Once the source is better understood, ask the plumber to explain the repair options and any remaining uncertainty. Replacing accessible fittings is a different scope from reaching pipework beneath a surface.
 
@@ -69,7 +69,7 @@ If cabinets, walls, paving or landscaping require access, clarify who will arran
 
 If the dampness is near a hot-water unit, our [hot water repair or replacement guide](/blog/hot-water-repair-or-replacement-hills-district/) explains the separate questions worth discussing about that system.
 
-### Book a Hills District Leak Investigation
+### Bring Us the Clues, Not a Guessed Diagnosis
 
 Check our [local service areas](/service-areas/) and prepare your address, symptoms and access details. Explain whether the issue is ongoing or rapidly worsening so the team can discuss the appropriate next step.
 

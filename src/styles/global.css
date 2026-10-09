@@ -228,13 +228,26 @@ p { max-width: 70ch; margin-block: 0 1rem; }
 .blog-empty { max-width: 48rem; padding: 2rem 0; border-block: 1px solid var(--line); }
 .blog-empty h2 { font-size: clamp(2.4rem, 5vw, 3.5rem); }
 .blog-empty p { margin-top: 1rem; color: var(--muted); }
-.article-header { padding-block: var(--section-space); color: #fff; background: var(--navy); }
-.article-header__back { display: inline-block; margin-bottom: 2rem; color: var(--blue-light); font-weight: 700; }
-.article-header h1 { max-width: 14ch; }
+.article-header { padding-block: clamp(2rem, 4vw, 3rem); color: #fff; background: var(--navy); }
+.article-header__back { display: inline-block; margin-bottom: 1.25rem; color: var(--blue-light); font-weight: 700; }
+.article-header h1 { max-width: 26ch; font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.05; text-wrap: pretty; }
 .article-header__description { max-width: 48rem; margin-top: 1.5rem; color: #d5deed; font-size: 1.15rem; }
 .article-meta { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; margin-top: 1.75rem; color: #b9c8dc; font-size: .9rem; }
 .article-image { width: min(75rem, calc(100% - 2.5rem)); height: auto; aspect-ratio: 16 / 9; margin: clamp(2rem, 5vw, 4rem) auto 0; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); }
-.article-body { width: min(48rem, calc(100% - 2.5rem)); margin-inline: auto; padding-block: var(--section-space); font-size: 1.08rem; }
+.blog-article { --article-header-height: 108px; }
+.article-layout { display: grid; grid-template-columns: minmax(14rem, 18rem) minmax(0, 44rem); justify-content: space-between; gap: clamp(2rem, 5vw, 5rem); align-items: start; padding-block: 2rem; }
+.article-layout--plain { display: block; }
+.article-sidebar { position: sticky; top: calc(var(--article-header-height) + 1.25rem); min-width: 0; }
+.article-toc { border: 1px solid var(--line); border-radius: var(--radius); background: var(--mist); }
+.article-toc summary { padding: 1rem 1.25rem; color: var(--navy); font-size: 1.05rem; font-weight: 700; cursor: pointer; }
+.article-toc nav { max-height: calc(100dvh - var(--article-header-height) - 10rem); overflow-y: auto; padding: 0 .75rem .75rem; scrollbar-width: thin; }
+.article-toc ul { margin: 0; padding: 0; list-style: none; }
+.article-toc a { display: block; padding: .65rem .5rem; color: var(--muted); font-size: .95rem; line-height: 1.4; text-decoration: none; border-radius: .25rem; }
+.article-toc a:hover { color: var(--red); text-decoration: underline; }
+.article-toc a[aria-current="location"] { color: var(--red-dark); background: var(--red-soft); font-weight: 700; }
+.article-sidebar__back { display: inline-block; padding-block: .75rem; margin-top: .5rem; font-size: .9rem; font-weight: 600; }
+.article-body { width: 100%; max-width: 70ch; min-width: 0; margin-inline: auto; font-size: 1.125rem; line-height: 1.8; overflow-wrap: break-word; }
+.article-body :is(h2, h3) { scroll-margin-top: calc(var(--article-header-height) + 2rem); line-height: 1.15; text-wrap: pretty; }
 .article-body > :first-child { margin-top: 0; }
 .article-body h2 { margin: 3.5rem 0 1rem; font-size: clamp(2.4rem, 5vw, 3.5rem); }
 .article-body h3 { margin: 2.5rem 0 .75rem; font-size: 2rem; }
@@ -243,6 +256,18 @@ p { max-width: 70ch; margin-block: 0 1rem; }
 .article-body li { margin-block: .6rem; padding-left: .35rem; }
 .article-body blockquote { margin: 2rem 0; padding: 1.25rem 1.5rem; color: var(--navy); background: var(--mist); border-left: 1px solid var(--red); }
 .article-body a { font-weight: 600; }
+@media (min-width: 960px) {
+  .article-toc summary { list-style: none; cursor: default; }
+  .article-toc summary::-webkit-details-marker { display: none; }
+}
+@media (max-width: 959px) {
+  .article-layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-top: .75rem; }
+  .article-sidebar { top: calc(var(--article-header-height) + .5rem); z-index: 10; }
+  .article-toc { background: var(--paper); }
+  .article-toc nav { max-height: min(50dvh, 24rem); }
+  .article-sidebar__back { display: none; }
+  .article-body :is(h2, h3) { scroll-margin-top: calc(var(--article-header-height) + 5rem); }
+}
 
 .site-footer { padding: 4.5rem max(1.25rem, calc((100% - 75rem) / 2)) 1.5rem; color: #fff; background: #041127; }
 .site-footer__grid { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 3rem; }

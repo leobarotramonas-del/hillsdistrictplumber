@@ -10,7 +10,8 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+const contents = headings.filter(({ depth }) => depth === 2 || depth === 3);
 const path = `/blog/${post.id}/`;
 const canonical = new URL(path, site.url).toString();
 const published = post.data.publishDate.toISOString();
@@ -22,10 +23,59 @@ const schema = [
 ];
 ---
 <BaseLayout title={post.data.title} description={post.data.description} canonicalPath={path} schema={schema} image={post.data.image} imageAlt={post.data.imageAlt} pageType="article" publishedTime={published} modifiedTime={modified}>
-  <article>
+  <article class="blog-article">
     <header class="article-header"><div class="wrap"><a class="article-header__back" href="/blog/">Back to Plumbing Advice</a><h1>{post.data.title}</h1><p class="article-header__description">{post.data.description}</p><div class="article-meta"><span>{post.data.category}</span><time datetime={published}>Published {formatDate(post.data.publishDate)}</time>{post.data.updatedDate && <time datetime={modified}>Updated {formatDate(post.data.updatedDate)}</time>}<span>By {post.data.author}</span></div></div></header>
     {post.data.image && <img class="article-image" src={post.data.image} width="1200" height="675" loading="eager" decoding="async" alt={post.data.imageAlt ?? ''} />}
-    <div class="article-body"><Content /></div>
+    <div class:list={['article-layout', 'wrap', { 'article-layout--plain': !contents.length }]}>
+      {contents.length > 0 && <aside class="article-sidebar" aria-label="Article navigation">
+        <details class="article-toc" open>
+          <summary>On This Page</summary>
+          <nav aria-label="Table of contents"><ul>{contents.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul></nav>
+        </details>
+        <a class="article-sidebar__back" href="/blog/">Browse All Plumbing Guides</a>
+      </aside>}
+      <div class="article-body"><Content /></div>
+    </div>
   </article>
   <CtaBand title="Ask About a Plumbing Problem" />
 </BaseLayout>
+
+<script>
+  const article = document.querySelector<HTMLElement>('.blog-article');
+  const toc = article?.querySelector<HTMLDetailsElement>('.article-toc');
+  if (article && toc) {
+    const desktop = window.matchMedia('(min-width: 960px)');
+    const links = Array.from(toc.querySelectorAll<HTMLAnchorElement>('nav a'));
+    const sections = links.map((link) => document.getElementById(decodeURIComponent(link.hash.slice(1))));
+    const header = document.querySelector<HTMLElement>('.site-header');
+    let headerHeight = header?.getBoundingClientRect().height ?? 108;
+    let queued = false;
+    const updateCurrent = () => {
+      queued = false;
+      const offset = headerHeight + (desktop.matches ? 40 : 88);
+      let active = -1;
+      sections.forEach((section, index) => { if (section && section.getBoundingClientRect().top <= offset) active = index; });
+      links.forEach((link, index) => {
+        if (index === active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+    const syncLayout = () => { toc.open = desktop.matches; updateCurrent(); };
+    syncLayout();
+    desktop.addEventListener('change', syncLayout);
+    if (header) new ResizeObserver(() => {
+      headerHeight = header.getBoundingClientRect().height;
+      article.style.setProperty('--article-header-height', `${headerHeight}px`);
+      updateCurrent();
+    }).observe(header);
+    toc.querySelector('summary')?.addEventListener('click', (event) => { if (desktop.matches) event.preventDefault(); });
+    links.forEach((link, index) => link.addEventListener('click', () => {
+      if (!desktop.matches) toc.open = false;
+      const section = sections[index];
+      if (section) { section.setAttribute('tabindex', '-1'); section.focus({ preventScroll: true }); }
+    }));
+    window.addEventListener('scroll', () => {
+      if (!queued) { queued = true; requestAnimationFrame(updateCurrent); }
+    }, { passive: true });
+  }
+</script>
