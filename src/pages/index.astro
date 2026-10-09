@@ -6,8 +6,8 @@ import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { areas, homeFaqs, reviews, services, site } from '../data/site';
 
-const title = 'The Hills District Plumber by Antons';
-const description = 'Licensed Hills District plumbing for drains, hot water, leaks, gas fitting and repairs. Urgent calls are taken 24 hours, 7 days a week.';
+const title = 'Hills District Plumber | Repairs & Emergency Calls';
+const description = 'Need a Hills District plumber? Get help with blocked drains, leaks, hot water and plumbing repairs. Call 0493 824 176; urgent calls answered 24/7.';
 const faqSchema = { '@type': 'FAQPage', '@id': `${site.url}/#faq`, mainEntity: homeFaqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/" schema={[faqSchema]}>

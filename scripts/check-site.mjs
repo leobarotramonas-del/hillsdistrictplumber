@@ -16,6 +16,11 @@ const errors = [];
 const canonicalBase = 'https://thehillsdistrictplumber.com.au';
 const pages = new Map();
 const incomingLinks = new Map();
+const seenTitles = new Map();
+const seenDescriptions = new Map();
+const decodeHtml = (value) => value.replace(/&#(x[0-9a-f]+|[0-9]+);/gi, (_, code) => String.fromCodePoint(code.toLowerCase().startsWith('x') ? parseInt(code.slice(1), 16) : Number(code))).replace(/&(?:amp|quot|apos|lt|gt|#39|#x27);/gi, (entity) => ({
+  '&amp;': '&', '&quot;': '"', '&apos;': "'", '&lt;': '<', '&gt;': '>', '&#39;': "'", '&#x27;': "'",
+}[entity.toLowerCase()]));
 const strip = (value) => value.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<style[\s\S]*?<\/style>/gi, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const attr = (html, tag, name) => [...html.matchAll(new RegExp(`<${tag}\\b[^>]*\\b${name}=["']([^"']*)["'][^>]*>`, 'gi'))].map((match) => match[1]);
 
@@ -44,7 +49,17 @@ for (const file of htmlFiles) {
     } catch { errors.push(`${urlPath}: invalid ${key} URL`); }
   }
   if (title.length < 30 || title.length > 60) errors.push(`${urlPath}: title length ${title.length}`);
-  if (description.length < 100 || description.length > 150) errors.push(`${urlPath}: description length ${description.length}`);
+  if (description.length < 100 || description.length > 160) errors.push(`${urlPath}: description length ${description.length}`);
+  for (const [label, value, seen] of [['title', title, seenTitles], ['description', description, seenDescriptions]]) {
+    if (seen.has(value)) errors.push(`${urlPath}: duplicate ${label} also on ${seen.get(value)}`);
+    seen.set(value, urlPath);
+  }
+  if ((html.match(/<title\b/g) ?? []).length !== 1) errors.push(`${urlPath}: expected exactly one title tag`);
+  if ((html.match(/<meta name="description"/g) ?? []).length !== 1) errors.push(`${urlPath}: expected exactly one meta description`);
+  for (const prefix of ['og', 'twitter']) {
+    if (decodeHtml(socialTags.get(`${prefix}:title`) ?? '') !== decodeHtml(title)) errors.push(`${urlPath}: ${prefix} title mismatch`);
+    if (decodeHtml(socialTags.get(`${prefix}:description`) ?? '') !== decodeHtml(description)) errors.push(`${urlPath}: ${prefix} description mismatch`);
+  }
   if (canonical !== expected) errors.push(`${urlPath}: canonical ${canonical} should be ${expected}`);
   for (const lang of ['en-AU', 'x-default']) if (!html.includes(`hreflang="${lang}" href="${expected}"`)) errors.push(`${urlPath}: missing self-referencing ${lang}`);
   if (!/<html lang="en-AU">/i.test(html)) errors.push(`${urlPath}: missing en-AU language`);
